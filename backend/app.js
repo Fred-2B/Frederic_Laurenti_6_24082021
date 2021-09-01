@@ -8,6 +8,8 @@ const helmet = require('helmet');
 require('dotenv').config();
 const session = require('express-session');
 
+const userRoutes = require('./routes/user.js');  //accede auw user
+const sauceRoutes = require('./routes/sauce');
 
 /* Connexion à la base de données */
 mongoose.connect('mongodb+srv://fred-2b:8578Mongo@cluster0.sjbzc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
@@ -28,5 +30,11 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(bodyParser.json());
+
+// ENREGISTREMENT DES ROUTEURS
+app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/api/auth', userRoutes);
+app.use('/api/sauces', sauceRoutes);
 
 module.exports = app;
