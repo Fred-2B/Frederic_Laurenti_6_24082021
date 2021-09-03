@@ -1,5 +1,8 @@
-const http =require('http'); // Import pakage HTTP de node
-const app = require('./app'); // Import APP pour l'utilisation de l'application sur le serveur
+// Importation pakage HTTP de node
+const http =require('http');
+
+// Importation APP pour l'utilisation de l'application sur le serveur
+const app = require('./app'); 
 
 
 // La fonction NORMAILZEPORT renvoie un port valide

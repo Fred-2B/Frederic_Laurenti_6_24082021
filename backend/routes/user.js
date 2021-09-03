@@ -1,4 +1,4 @@
-// On a besoin d'Express
+// Création du routeur Express
 const express = require('express');
 
 // On crée un routeur avec la méthode d'EXPRESS

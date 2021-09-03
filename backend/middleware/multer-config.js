@@ -1,4 +1,4 @@
-// On importe multer qui permet de gérer les fichiers entrants dans les requêtes HTTP
+// Importation de multer qui permet de gérer les fichiers entrants dans les requêtes HTTP
 const multer = require('multer');
 
 // Dictionnaires des extension des fichiers
