@@ -1,45 +1,57 @@
+// On utilise BCRYPT pour hasher le mot de passe des utilisateurs
+const bcrypt = require('bcrypt')
+
+// On recupere notre models/User.js, créer avec le schéma MONGOOSE
 const User = require('../models/user');
-const bcrypt = require('bcrypt');
+
+// On utilise jsonwebtoken pour attribuer un token au moment de la connexion
 const jwt = require('jsonwebtoken');
 
-// MIDDLEWARE 
-// HASH MOT DE PASSE BCRYPT/ NEW UTILISATEUR
+
+// Création de nouveaux utilisateurs (Post signup)
 exports.signup = (req, res, next) => {
-    bcrypt.hash(req.body.password, 10)  // 10 = nombres de tours
-        .then(hash => {
-            const user = new User({
-                email:req.body.email,
-                password: hash
-            });
-            user.save()
-            .then(() => res.status(201).json({ message : 'Utilisateur crée !'}))
-            .catch(error => res.status(400).json({ error }));
-        })
-        .catch(error => res.status(500).json({ error }));
+    // Hash du mot de passe avec bcrypt
+    bcrypt.hash(req.body.password, 10)
+    .then(hash => {
+        // Création du nouvel utilisateur
+        const user = new User({
+            email: req.body.email,
+            password: hash
+        });
+        // Sauvegarde de l'utilisateur dans la BD
+        user.save()
+        .then(() => res.status(201).json({ message: 'Utilisateur créé !'}))
+        .catch(error => res.status(400).json({ error }));
+    })
+    .catch(error => res.status(500).json({ error }));
 };
 
-// CONNEXION UTILISATEUR ENREGISTRE
+// Création de la connexion d'utilisateur enregistré (Post login)
 exports.login = (req, res, next) => {
-    User.findOne({email: req.body.email}) // verification si email est dans bd
-    .then(user =>{
+   // Recherche d'un utilisateur dans la BD
+    User.findOne({ email: req.body.email })
+    .then(user => {
+        // Si on ne trouve pas l'utilisateur
         if(!user) {
-            return res.status(401).json({ error: 'Utilisateur non trouvé !'});
+            return res.status(401).json({ error: 'Utilisateur non trouvé !'})
         }
-        bcrypt.compare(req.body.password, user.password) //compare le password
-            .then(valid => {
-                if(!valid) {
-                    return res.status(401).json({ error : 'Mot de passe incorrect !'});
-                }
-                res.status(200).json({
-                    userId: user._id,
-                    token: jwt.sign(          // token securise compte utilisateur
-                        { userId: user._id },
-                        'RANDOM_TOKEN_SECRET',
-                        { expiresIn: '24h' }
-                    )
-                });
-            })
-            .catch(error => res.status(500).json({error}));
+        // On compare le mot de passe de la requete avec celui de la base de données
+        bcrypt.compare(req.body.password, user.password)
+        .then(valid => {
+            if(!valid) {
+                return res.status(401).json({ error: 'Mot de passe incorrect !'})
+            }
+            res.status(200).json({
+                userId: user._id,
+                // Création d'un token pour sécuriser le compte de l'utilisateur
+                token: jwt.sign(
+                    { userId: user._id },
+                    'RANDOM_TOKEN_SECRET',
+                    { expiresIn: '24h' }
+                )
+            });
+        })
+        .catch(error => res.status(500).json({ error }));
     })
-    .catch(error => res.status(500).json({error}));
+    .catch(error => res.status(500).json({ error }));
 };

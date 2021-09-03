@@ -1,7 +1,7 @@
-// Utilisation de multer pour enregistrer les fichiers images
+// On importe multer qui permet de gérer les fichiers entrants dans les requêtes HTTP
 const multer = require('multer');
 
-// Bibliotheque des l'extensions des fichiers
+// Dictionnaires des extension des fichiers
 const MIME_TYPES = {
     'image/jpg': 'jpg',
     'image/jpeg': 'jpg',
@@ -9,7 +9,7 @@ const MIME_TYPES = {
 };
 
 const storage = multer.diskStorage({
-    // Enregistrement dans le dossier images
+    // Enregistrement dans le dossier "images"
     destination: (req, file, callback) => {
         callback(null, 'images')
     },
@@ -21,4 +21,5 @@ const storage = multer.diskStorage({
     }
 });
 
+// Exportation du middleware multer
 module.exports = multer({ storage }).single('image');
