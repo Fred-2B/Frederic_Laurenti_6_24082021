@@ -10,11 +10,14 @@ const mongoose = require('mongoose');
 // Importation de la route dédiée aux sauces
 const saucesRoutes = require('./routes/sauce');
 
-// On importe la route dédiée aux utilisateurs
+// Importation de la route dédiée aux utilisateurs
 const userRoutes = require('./routes/user');
 
 // Donne accès au chemin de notre système de fichier "images"
 const path = require('path');
+
+// utilisation DOTENV pour masquer les informations de connexion à la base de données à l'aide de variables d'environnement
+require('dotenv').config();
 
 
 // Connexion à la base de donnée avec MONGOOSE

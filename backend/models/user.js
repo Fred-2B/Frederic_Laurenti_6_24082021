@@ -13,5 +13,5 @@ const userSchema = mongoose.Schema({
 // uniqueValidator = évite que plusieurs utilisateurs s'inscrivent avec le même mail
 userSchema.plugin(uniqueValidator);
 
-// On exporte ce schéma sous forme de modele: le modele s'appellera USER et on lui passe le shéma de données
+// On exporte ce schéma sous forme de modele: le modele s'appelle USER et on lui passe le shéma de données
 module.exports = mongoose.model('User', userSchema);
