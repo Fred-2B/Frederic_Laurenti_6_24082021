@@ -27,9 +27,10 @@ require('dotenv').config();
 
 // Connexion à la base de donnée avec MONGOOSE
 // Hors soutenance il serait judicieux de créer un fichier .env (dotenv) pour masquer les informations sensibles 
-mongoose.connect('mongodb+srv://fred-2b:8578Mongo@cluster0.sjbzc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-  { useNewUrlParser: true,
-    useUnifiedTopology: true })
+mongoose.connect(process.env.SECRET_DB, { 
+  useNewUrlParser: true,
+  useUnifiedTopology: true 
+})
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
