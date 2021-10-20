@@ -4,6 +4,14 @@
 
 <p>Construire une API sécurisée pour une application d'avis gastronomiques</p>
 
+<h3>Installation</h3>
+
+<p>Si les packages sont déja installés, ces commandes suffisent à démarrer les serveurs.</p>
+
+<p>● `npm start` via le terminal sur le frontend</p>
+<p>● `nodemon server` via le terminal sur le backend</p>
+<p>● Exécutez le back-end sur http://localhost:3000 seulement</p>
+
 <h3>Exigences de sécurité</h3>
 
 <p>● Le mot de passe de l'utilisateur doit être haché.</p>
@@ -31,13 +39,7 @@ de sécurité actualisés.</p>
 | Javascript                  |                       |
 -------------------------------------------------------
 
-<h3>Installation</h3>
 
-<p>Si les packages sont déja installés, ces commandes suffisent à démarrer les serveurs.</p>
-
-<p>● `npm start` via le terminal sur le frontend</p>
-<p>● `nodemon server` via le terminal sur le backend</p>
-<p>● Exécutez le back-end sur http://localhost:3000 seulement</p>
 
 	
 
